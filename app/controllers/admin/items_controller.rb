@@ -1,8 +1,11 @@
 class Admin::ItemsController < ApplicationController
 before_action :authenticate_admin_user!
     
-def index
+def new
     @item = Item.new(params[:id])
+end
+    
+def index
     @items = Item.page(params[:page]).per(10)
 end
 
@@ -15,7 +18,6 @@ def create
 end
 
 def edit
-    
 end
 
 def update
