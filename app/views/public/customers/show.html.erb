@@ -1,6 +1,11 @@
-<%= @customer.last_name %> <%= @customer.first_name %><br>
-<%= @customer.last_name_kana %> <%= @customer.first_name_kana %><br>
-<%= @customer.postcode %><br>
-<%= @customer.address %><br>
-<%= @customer.phone_number %><br>
-<%= @customer.email %><br>
+<h1>マイページ</h1>
+<h3>登録情報</h3><%= link_to "編集する", edit_public_customer_path %>
+<h4>氏名</h4><%= @customer.last_name %> <%= @customer.first_name %><br>
+<h4>カナ</h4><%= @customer.last_name_kana %> <%= @customer.first_name_kana %><br>
+<h4>郵便番号</h4><%= @customer.postcode %><br>
+<h4>住所</h4><%= @customer.address %><br>
+<h4>電話番号</h4><%= @customer.phone_number %><br>
+<h4>メールアドレス</h4><%= @customer.email %><br>
+
+<h3>配送先</h3>一覧を見る
+<h3>注文履歴</h3>一覧を見る
