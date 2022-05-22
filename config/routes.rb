@@ -4,9 +4,10 @@ Rails.application.routes.draw do
     resources :items, only: [:new,:index,:show,:edit,:create,:update]
   end
   namespace :public do
-    resources :items, only: [:index,:show]
+    resources :items, only: [:index,:show] do
   collection do
         post 'search'
+       end
     end
   end
 end

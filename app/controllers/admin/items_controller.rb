@@ -1,16 +1,17 @@
 class Admin::ItemsController < ApplicationController
-before_action :authenticate_admin_user!
+#before_action :authenticate_admin!
     
 def new
     @item = Item.new(params[:id])
 end
     
 def index
-    @items = Item.page(params[:page]).per(10)
+    @item = Item.new(params[:id])
+    @items = Item.all
 end
 
 def show
-    
+    @item = Item.find(params[:id])
 end
 
 def create
@@ -22,5 +23,10 @@ end
 
 def update
 end
-    
+
+private
+
+def item_params
+    params.require(:item).permit(:image, :name, :introduction, :genre_id, :price, :validation)
+end
 end

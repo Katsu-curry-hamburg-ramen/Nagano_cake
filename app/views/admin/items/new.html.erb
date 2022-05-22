@@ -1,0 +1,53 @@
+<div class="jumbotron">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-0">
+                <h2>商品新規登録</h2>
+            </div>
+        </div>
+            
+            <!--</%= form_with(@item, url:admin_items_path) do |f| %>-->
+            <!--</%= render 'layouts/error_messages', model: f.object %>-->
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="img-fluid">
+                        <%= image_tag @item.get_product_image %>
+                            <%= f.file_field :image, placeholder:"商品画像" %>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-group form-group-lg" >
+                            <%= f.label :name, '商品名' %>
+                            <%= f.text_field :name %> 
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :introduction, '商品説明' %>
+                            <%= f.text_area :introduction %>
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :genre_id, 'ジャンル' %>
+                            <%= f.collection_select :genre_id, Genre.all, :id, :name %> 
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :price, '税抜価格' %>
+                            <%= f.text_field :price %>円 
+                        </div>
+                        <div class="form-group">
+                            <%= f.label :validation, '販売ステータス' %>
+                            <%= f.select :validation, {
+                                "販売中": true,
+                                "販売停止中": false
+                            } %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4 col-xs-offset-8">
+                        <%= f.submit "新規登録" , class: "btn btn-primary"  %>
+                    </div>
+                </div>
+            <!--</% end %>-->
+
+    </div>
+</div>
