@@ -1,0 +1,42 @@
+<main>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th><h2>ショッピングカート</h2></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th><h2><%= link_to "カートを空にする", cart_items_path, method: :delete, "data-confirm" => "Are you sure？" %></h2></th>
+            </tr>
+
+            <tr>
+                <th>商品名</th>
+                <th>単価(税込)</th>
+                <th>数量</th>
+                <th>小計</th>
+                <th colspan="3"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @cart_items.each do |cart_item| %>
+            <tr>
+                <th><%= cart_item.item.name %></th>
+                <th><%= cart_item.item.with_tax_price %></th>
+                <th>
+                    <%= form_with model: cart_item do |f| %>
+                        <%= f.select :quantity, [1,2,3,4,5] %>
+                        <%= f.submit "変更" %>
+                    <% end %>
+                </th>
+                <th><%= cart_item.subtotal %></th>
+                <th><%= link_to "削除する", public_cart_items_path(cart_item.id), method: :delete, data: { confirm: "Are you sure?"} %></th>
+                <% @total +=  cart_item.subtotal %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+</main>
