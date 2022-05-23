@@ -15,13 +15,15 @@ def show
 end
 
 def create
-   @item = Item.new(item_params)
+    @item = Item.new(item_params)
 end
 
 def edit
+    @item = Item.find(params[:id])
 end
 
 def update
+    @item = Item.find(params[:id])
 end
 
 private
