@@ -16,9 +16,18 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+
   namespace :public do
     resources :customers
   end
-  
+
+  # 退会確認画面
+  get '/customers/:id/unsubscribe' => 'public/customers#unsubscribe', as: 'customer_unsubscribe'
+  # 論理削除用のルーティング
+  patch '/customers/:id/withdrawal' => 'public/customers#withdrawal', as: 'customers_withdrawal'
+
+  namespace :admin do
+    resources :customers
+  end
+
 end

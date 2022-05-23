@@ -1,6 +1,41 @@
-<%= @customer.last_name %> <%= @customer.first_name %><br>
-<%= @customer.last_name_kana %> <%= @customer.first_name_kana %><br>
-<%= @customer.postcode %><br>
-<%= @customer.address %><br>
-<%= @customer.phone_number %><br>
-<%= @customer.email %><br>
+<div class="row">
+  <div class="col-lg-8">
+    <h2 class="p-3 font-weight-bold">マイページ</h2>
+    <h3 class="mt-5 mb-3 font-weight-normal">登録情報</h3>
+      <%= link_to "編集する", edit_public_customer_path, class:"btn btn-primary" %>
+      <table class="table my-3">
+          <tr>
+            <th>氏名</th>
+            <td><%= @customer.last_name %> <%= @customer.first_name %></td>
+          </tr>
+          <tr>
+            <th>カナ</th>
+            <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
+          </tr>
+          <tr>
+            <th>郵便番号</th>
+            <td><%= @customer.postcode %></td>
+          </tr>
+          <tr>
+            <th>住所</th>
+            <td><%= @customer.address %></td>
+          </tr>
+          <tr>
+            <th>電話番号</th>
+            <td><%= @customer.phone_number %></td>
+          </tr>
+          <tr>
+            <th>メールアドレス</th>
+            <td><%= @customer.email %></td>
+          </tr>
+      </table>
+    </div>
+  </div>
+<div class="row">
+  <div class="col-2">
+      <h3 class="font-weight-normal">配送先</h3>
+      一覧を見る
+      <h3 class="font-weight-normal">注文履歴</h3>
+      一覧を見る
+  </div>
+</div>

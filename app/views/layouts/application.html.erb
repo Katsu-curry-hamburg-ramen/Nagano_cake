@@ -6,10 +6,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <% if customer_signed_in? %>
@@ -24,6 +23,22 @@
         </li>
         <li>
           <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+        </li>
+      <% elsif admin_signed_in? %>
+        <li>
+          商品一覧
+        </li>
+        <li>
+          <%= link_to "会員一覧", admin_customers_path %>
+        </li>
+        <li>
+          注文履歴一覧
+        </li>
+        <li>
+          ジャンル一覧
+        </li>
+        <li>
+          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
         </li>
       <% else %>
         <li>
@@ -40,6 +55,8 @@
         </li>
       <% end %>
     </header>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
