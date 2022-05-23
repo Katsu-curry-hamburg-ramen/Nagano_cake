@@ -4,19 +4,23 @@
   </div>
 
     <div class="row">
+      <tbody>
       <%= form_with model: @item, url:admin_items_path(@item.id) do |f| %>
         <div class="col-xs-4">
           <%= f.file_field :product_image, placeholder:"商品画像", accept: "image/*" %>
         </div>
     
         <div class="col-xs-8">
-          <p>商品名 <%= f.text_field :name %> </p>
-          <p>商品説明 <%= f.text_area :introduction, size: 25 %> </p>
-          <p>ジャンル <%= f.collection_select :genre_id, Genre.all, :id, :name %> </p>
-          <p>税抜価格 <%= f.text_field :price %>円 </p>
-          <p>販売ステータス <%= f.select :validation, {"販売中": true, "売り切れ": false} %> </p>
+          <tr>
+          <td>商品名 <%= f.text_field :name %> </td>
+          <td>商品説明 <%= f.text_area :introduction, size: 25 %> </td>
+          <td>ジャンル <%= f.collection_select :genre_id, Genre.all, :id, :name %> </td>
+          <td>税抜価格 <%= f.text_field :price %>円 </td>
+          <td>販売ステータス <%= f.select :validation, {"販売中": true, "売り切れ": false} %> </td>
             <%= f.submit "変更を保存",class: "btn btn-primary" %>
+          </tr>
           </div>
-        <% end %>
+      <% end %>
+      </tbody>  
     </div>
 </div>
