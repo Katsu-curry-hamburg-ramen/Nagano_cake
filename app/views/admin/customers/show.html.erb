@@ -2,9 +2,9 @@
   <div class="col-4">
   </div>
   <div class="col-4">
-    <h3 class="bg-light w-75 text-center">
+    <h4 class="bg-light w-75 text-center">
       <%= @customer.last_name %><%= @customer.first_name %>さんの会員詳細
-    </h3>
+    </h4>
   </div>
   <div class="col-4">
   </div>
@@ -54,8 +54,8 @@
         </td>
       </tr>
     </table>
-      <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success ml-4" %>
-      <%= link_to "注文履歴一覧を見る", class:"btn btn-primary ml-4" %>
+      <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-danger ml-4" %>
+      <%= link_to "注文履歴一覧を見る", class:"btn btn-outline-danger ml-4" %>
   </div>
   <div class="col-4">
   </div>
