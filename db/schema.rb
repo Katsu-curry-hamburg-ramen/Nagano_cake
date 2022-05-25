@@ -10,6 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
+
+
+
+ActiveRecord::Schema.define(version: 2022_05_21_044408) do
+
+  create_table "cart_items", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
+    t.integer "item_id"
+    t.integer "customer_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "genrename"
+  end
+
+
 ActiveRecord::Schema.define(version: 2022_05_22_055330) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
@@ -71,4 +97,63 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+
+ActiveRecord::Schema.define(version: 2022_05_18_052107) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "last_name"
+    t.string "last_name_kana"
+    t.string "first_name"
+    t.string "first_name_kana"
+    t.string "phone_number"
+    t.string "postcode"
+    t.string "address"
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_deleted", default: false
+    t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+
+ActiveRecord::Schema.define(version: 2022_05_20_044731) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "customer_id", null: false
+    t.string "name", null: false
+    t.integer "postcode", null: false
+    t.text "address", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "postage", default: 800, null: false
+    t.integer "status", null: false
+    t.integer "payment_method", null: false
+    t.integer "total_payment", null: false
+    t.string "name", null: false
+    t.string "postcode", null: false
+    t.string "address", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+
+  end
+
 end
