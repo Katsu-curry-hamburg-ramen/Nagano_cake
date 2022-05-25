@@ -59,27 +59,25 @@ class Public::OrdersController < ApplicationController
 
 
 
-  def index
-    @orders = current_customer.orders.page(params[:page]).reverse_order
-  end
+ def index
+    @orders = current_customer.orders.all
+ end
 
 
 
 
-  def show
-    @order = Order.find(params[id])
-    @order_items = @order.order_items
-
+   def show
+    @order = Order.find(params[:id])
+    @order.postage = 800
     @total_price = 0
-    @order_items.each do |order_item|
-      subtotal_price = order_item.price * order_item.quantity
-      @total_price += subtotal_price
-    end
-  end
+    @subtotal = 0
+    @order_items = @order.order_
+   end
+end
 
   private
   def address_params
     params.require(:order).permit(:user_id,:payment_method,:total_payment,:postcode,:address,:name)
   end
 
-end
+

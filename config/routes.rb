@@ -41,11 +41,13 @@ Rails.application.routes.draw do
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
 
 
+  namespace :admin do
+    resources :orders, only: [:show, :update]
+  end
 
 
   namespace :public do
-    get 'orders/new'
-    get 'orders/edit'
+    resources :orders, only: [:new, :index, :show, :create]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
