@@ -14,7 +14,7 @@ class AddressesController < ApplicationController
      @address = Address.new(address_params)
      @address.customer_id = current_customer.id
      if @address.save
-     redirect_to customer_¥addresses_path(current_customer.id)
+     redirect_to customer_addresses_path(current_customer.id)
      else
      @addresses = @customer.addresses
      render'index'
@@ -28,7 +28,7 @@ class AddressesController < ApplicationController
   end
 
   def update
-      @address =current_customer.addresses.find_by(id: parms[:id])
+      @address =current_customer.addresses.find_by(id: params[:id])
       if @address.update(address_params)
       redirect_to customer_addresses_path
       else
