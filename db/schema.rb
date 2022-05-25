@@ -12,6 +12,8 @@
 
 
 
+
+
 ActiveRecord::Schema.define(version: 2022_05_21_044408) do
 
   create_table "cart_items", force: :cascade do |t|
@@ -32,6 +34,7 @@ ActiveRecord::Schema.define(version: 2022_05_21_044408) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "genrename"
   end
+
 
 ActiveRecord::Schema.define(version: 2022_05_22_055330) do
 
@@ -61,6 +64,25 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
+    t.integer "item_id"
+    t.integer "customer_id"
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "genrename"
   end
 
   create_table "items", force: :cascade do |t|
