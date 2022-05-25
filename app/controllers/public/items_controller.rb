@@ -8,6 +8,7 @@ end
 
 def show
     @item = Item.find(params[:id])
+    @genres = Genre.all
 end
 
 def search

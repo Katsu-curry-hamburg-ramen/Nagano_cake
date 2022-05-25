@@ -2,13 +2,12 @@ class Item < ApplicationRecord
     has_many :order_item, dependent: :destroy
     belongs_to :genre
     with_options presence: true do
-    validates :name
+    validates :name, uniqueness: true
     validates :body
     validates :genre_id
     validates :price
     end
     validates :is_active, inclusion:{in: [true, false]}
-    validates :name, presence: true, uniqueness: { scope: :user }
     has_one_attached :product_image
     
     def get_product_image(width, height)
