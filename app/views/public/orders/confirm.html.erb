@@ -33,17 +33,17 @@
         </tr>
         <tr>
           <th>商品合計</th>
-         
+
           <td>
           <% @cart_items.each do |cart_item| %>
             <% @total_price += cart_item.subtotal %>
           <% end %>
-          <%= number_to_currency(@total_price, strip_insignificant_zeros: true, :unit => "￥") %>
+          <%= ( @total_price) %>
           </td>
         </tr>
         <tr>
           <th>請求金額</th>
-          <td><%= number_to_currency(@order.postage + @total_payment, strip_insignificant_zeros: true, :unit => "￥") %></td>
+          <td><%= @order.postage + @total_price %></td>
         </tr>
       </table>
     </div>
@@ -53,18 +53,18 @@
       <p>支払方法 : <%= @order.payment_method_i18n %></p>
     </div>
     <div>
-      <p>お届け先 : 〒<%= @order.delivery_post_code %><%= @order.delivery_address %><br>
+      <p>お届け先 : 〒<%= @order.postcode %><%= @order.address %><br>
       <%= @order.delivery_name %>
     </div>
 
 
     <div>
     <%= form_with model: @order, url: orders_path, method: :post, local: true do |f| %>
-      <%= f.hidden_field :delivery_name %>
-      <%= f.hidden_field :delivery_address %>
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :address %>
       <%= f.hidden_field :payment_method %>
-      <%= f.hidden_field :delivery_post_code %>
-      <%= f.hidden_field :billing_amount, value: @total_price %>
+      <%= f.hidden_field :postcode %>
+      <%= f.hidden_field :,total_payment, value: @total_price %>
       <%= f.submit "注文を確定する", class:"btn btn-success" %>
     <% end %>
     </div>
