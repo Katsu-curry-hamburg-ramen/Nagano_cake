@@ -1,5 +1,13 @@
 ja:
   enums:
+
+    order_item:
+      status:
+        impossible: "着手不可"
+        wait: "製作待ち"
+        midst: "製作中"
+        completion: "製作完了"
+
     orders_item:
       status:
         cannot_be_started: "着手不可"
@@ -16,4 +24,5 @@ ja:
         product: "製作中"
         ready: "発送準備中"
         sent: "発送済み"
+
 
