@@ -1,47 +1,60 @@
-<%= form_with url: admin_customer_path(@customer), model: @customer, method: :patch do |f| %>
-  <div class="field">
-    氏名
-    <%= f.text_field :last_name, autofocus: true %>
-    <%= f.text_field :first_name, autofocus: true %>
+<div class="row my-5">
+  <div class="col-4">
   </div>
-
-  <div class="field">
-    フリガナ
-    <%= f.text_field :last_name_kana, autofocus: true %>
-    <%= f.text_field :first_name_kana, autofocus: true %>
+  <div class="col-4">
+    <h3 class="bg-light w-75 text-center">
+      <%= @customer.last_name %><%= @customer.first_name %>さんの会員情報編集
+    </h3>
   </div>
-
-  <div class="field">
-    <%= f.label :郵便番号（ハイフンなし） %>
-    <%= f.text_field :postcode, autofocus: true %>
+  <div class="col-4">
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :住所 %>
-    <%= f.text_field :address, autofocus: true %>
+<div class="row">
+  <div class="col-3">
   </div>
-
-  <div class="field">
-    <%= f.label :電話番号（ハイフンなし） %>
-    <%= f.text_field :phone_number, autofocus: true %>
+  <div class="col-5 d-flex align-items-center justify-content-center">
+    <%= form_with url: admin_customer_path(@customer), model: @customer, method: :patch do |f| %>
+      <table class="table">
+        <tr>
+          <th>氏名</th>
+          <td><%= f.text_field :last_name, autofocus: true, class:"form-control", placeholder:"姓" %></td>
+          <td><%= f.text_field :first_name, autofocus: true, class:"form-control", placeholder:"名" %></td>
+        </tr>
+        <tr>
+          <th>フリガナ</th>
+          <td><%= f.text_field :last_name_kana, autofocus: true, class:"form-control", placeholder:"セイ" %></td>
+          <td><%= f.text_field :first_name_kana, autofocus: true, class:"form-control", placeholder:"メイ" %></td>
+        </tr>
+        <tr>
+          <th>郵便番号（ハイフンなし）</th>
+          <td><%= f.text_field :postcode, autofocus: true, class:"form-control", placeholder:"Post Code" %></td>
+        </tr>
+        <tr>
+          <th>住所</th>
+          <td colspan="2"><%= f.text_field :address, autofocus: true, class:"form-control", placeholder:"Address" %></td>
+        </tr>
+        <tr>
+          <th>電話番号（ハイフンなし）</th>
+          <td><%= f.text_field :phone_number, autofocus: true, class:"form-control", placeholder:"Phone Number" %></td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control", placeholder:"Email" %></td>
+        </tr>
+        <tr>
+          <th>会員ステータス</th>
+          <td>
+            <%= f.radio_button :is_deleted, "false" %>
+            <%= f.label :有効, class:"mr-3"%>
+            <%= f.radio_button :is_deleted, "true" %>
+            <%= f.label :退会 %>
+          </td>
+        </tr>
+      </table>
+      <%= f.submit '編集内容を保存', class:"btn btn-success" %>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :会員ステータス %>
-
-    <%= f.radio_button :is_deleted, "false" %>
-    <%= f.label :有効 %>
-
-    <%= f.radio_button :is_deleted, "true" %>
-    <%= f.label :退会 %>
-
-  </div>
-
-  <%= f.submit '編集内容を保存' %>
-
-<% end %>
+  <dvi class="col-4">
+  </dvi>
+</div>
