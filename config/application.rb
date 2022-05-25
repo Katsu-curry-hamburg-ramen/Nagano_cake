@@ -10,9 +10,15 @@ module NaganoCake
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+<<<<<<< HEAD
     
    config.i18n.default_locale = :ja
    config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml').to_s]
+=======
+    config.i18n.default_locale = :ja
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/*.yml').to_s]
+
+>>>>>>> 1aa70118ce1143b9503875721e8af9e383bab833
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
