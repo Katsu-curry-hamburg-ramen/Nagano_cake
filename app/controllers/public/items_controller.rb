@@ -1,9 +1,9 @@
 class Public::ItemsController < ApplicationController
     
 def index
-    @item = Item.find(params[:id])
     @items = Item.all
     @quantity = Item.count
+    @genres = Genre.all
 end
 
 def show
@@ -11,7 +11,10 @@ def show
 end
 
 def search
-    
+    @genre = Genre.find_by(genrename: params[:genre_name])
+    @items = @genre.items
+    @quantity = @items.count
+    @genres = Genre.all
 end
     
 end

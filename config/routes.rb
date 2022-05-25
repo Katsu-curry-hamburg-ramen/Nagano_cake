@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :items, only: [:index,:show] do
   collection do
-        post 'search'
+        get 'search'
        end
     end
   end
