@@ -1,0 +1,29 @@
+<main>
+    
+    <body>
+        
+        <table>
+            <tbody>
+                <tr>
+                    <% @genres.each do |genre| %>
+                    <th><h2><%= genre.genrename %></h2></th>
+                    <th><h2><%= link_to "編集", edit_admin_genre_path(genre) %></h2></th>
+                    <% end %>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>New Genres</h2>
+        <%= form_with url: admin_genres_path(@genre), model: @genre do |f| %>
+        <div class="form-group">
+            <%= f.text_field :genrename %>
+        </div>
+        
+        <div class="form-group">
+            <%= f.submit "Create Genres" %>
+        </div>
+        
+        <% end %>
+    </body>
+
+</main>
