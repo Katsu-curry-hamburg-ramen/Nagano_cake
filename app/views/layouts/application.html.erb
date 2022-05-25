@@ -5,12 +5,66 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
-    <%= yield %>
+    <header class="shadow" bg-light>
+      <nav class="navbar">
+      <div class="container">
+        <a href="/"><%= image_tag('logo.png', size: '200x150') %></a>
+        <% if customer_signed_in? %>
+          <li>
+            <%= link_to public_customer_path(current_customer) do %>
+              <span><i class="far fa-user-circle"></i> My page </span>
+            <% end %>
+          </li>
+          <li>
+              <span><i class="fas fa-birthday-cake"></i> 商品一覧 </span>
+          </li>
+          <li>
+            カート
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+          </li>
+        <% elsif admin_signed_in? %>
+          <li>
+            商品一覧
+          </li>
+          <li>
+            <%= link_to "会員一覧", admin_customers_path %>
+          </li>
+          <li>
+            注文履歴一覧
+          </li>
+          <li>
+            ジャンル一覧
+          </li>
+          <li>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to "About", about_path %>
+          </li>
+          <li>
+            商品一覧
+          </li>
+          <li>
+            <%= link_to "新規登録", new_customer_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン", new_customer_session_path %>
+          </li>
+        <% end %>
+        </nav>
+      </header>
+      <main class="xl-auto lg-auto md-auto">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
