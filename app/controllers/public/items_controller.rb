@@ -8,6 +8,8 @@ end
 
 def show
     @item = Item.find(params[:id])
+    @genres = Genre.all
+    @cart_item = CartItem.new
 end
 
 def search
@@ -16,5 +18,5 @@ def search
     @quantity = @items.count
     @genres = Genre.all
 end
-    
+
 end
