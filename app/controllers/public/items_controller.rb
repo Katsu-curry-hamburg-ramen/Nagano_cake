@@ -18,5 +18,5 @@ def search
     @quantity = @items.count
     @genres = Genre.all
 end
-    
+
 end

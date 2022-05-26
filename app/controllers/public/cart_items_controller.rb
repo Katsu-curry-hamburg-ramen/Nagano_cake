@@ -1,9 +1,17 @@
 class Public::CartItemsController < ApplicationController
+    def new
+        @cart_item = CartItem.new
+    end
     
     def index
         @cart_items = CartItem.all
         @total = 0
-        
+    end
+    
+    def update
+        cart_item = CartItem.find(params[:id])
+        cart_item.update(cart_item_params)
+        redirect_to public_cart_items_path
     end
     
     def destroy_all
@@ -26,7 +34,6 @@ class Public::CartItemsController < ApplicationController
             @genres = Genre.all
             render 'public/items/show'
         end
-        
     end
     
     private
