@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
     has_many :order_item, dependent: :destroy
     belongs_to :genre
+    has_many :cart_items, dependent: :destroy
     with_options presence: true do
     validates :name, uniqueness: true
     validates :body
