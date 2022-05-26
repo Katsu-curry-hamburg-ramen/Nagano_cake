@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :order_items
+
   end
 
 
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
 
 
