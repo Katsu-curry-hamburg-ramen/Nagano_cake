@@ -1,6 +1,7 @@
 class CartItem < ApplicationRecord
     belongs_to :item
+    validates :quantity, presence: true
     def subtotal
-        item.with_tax_price * quantity
+        item.add_tax_price * quantity
     end
 end
