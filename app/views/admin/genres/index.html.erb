@@ -14,7 +14,7 @@
         </table>
         
         <h2>New Genres</h2>
-        <%= form_with url: admin_genres_path(@genre), model: @genre do |f| %>
+        <%= form_with url: admin_genres_path(@genre.id), model: @genre do |f| %>
         <div class="form-group">
             <%= f.text_field :genrename %>
         </div>

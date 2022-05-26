@@ -1,4 +1,5 @@
 class Item < ApplicationRecord
+    has_many :cart_items, dependent: :destroy
     has_many :order_item, dependent: :destroy
     belongs_to :genre
     with_options presence: true do

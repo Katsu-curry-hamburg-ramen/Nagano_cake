@@ -1,4 +1,7 @@
 class Public::CartItemsController < ApplicationController
+    def new
+        @cart_item = CartItem.new
+    end
     
     def index
         @cart_items = CartItem.all
