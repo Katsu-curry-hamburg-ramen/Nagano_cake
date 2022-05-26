@@ -7,7 +7,9 @@
     <div class="col-4">
     </div>
   </div>
-  <%= flash.now[:alert] %>
+    <div class="row">
+      <%= render 'layouts/errors', abj: @item %>
+     </div>
   <div class="row">
     <div class="col-4">
     </div>

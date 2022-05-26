@@ -5,6 +5,7 @@
     </div>
     <div class="col-xs-10">
       <div class="col-xs-4 ">
+         <%= render 'layouts/errors', abj: @cart_item %>
         <%= image_tag @item.get_product_image(200,200) %><br>
       </div>
       <div class="col-xs-8 ">
