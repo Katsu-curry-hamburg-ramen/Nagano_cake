@@ -24,19 +24,22 @@
             <% @cart_items.each do |cart_item| %>
             <tr>
                 <th><%= cart_item.item.name %></th>
-                <th><%= cart_item.item.with_tax_price %></th>
+                <th><%= cart_item.item.add_tax_price %></th>
                 <th>
-                    <%= form_with model: cart_item do |f| %>
+                    <%= form_with model: cart_item, url: public_cart_item_path(cart_item.id) do |f| %>
                         <%= f.select :quantity, [1,2,3,4,5] %>
                         <%= f.submit "変更" %>
                     <% end %>
                 </th>
                 <th><%= cart_item.subtotal %></th>
-                <th><%= link_to "削除する", public_cart_items_path(cart_item.id), method: :delete, data: { confirm: "Are you sure?"} %></th>
+                <th><%= link_to "削除する", public_cart_items_path(cart_item), method: :delete, data: { confirm: "Are you sure?"} %></th>
                 <% @total +=  cart_item.subtotal %>
             </tr>
             <% end %>
+            
         </tbody>
     </table>
+    <h3>合計金額</h3>
+    <h3><%= @total %></h3>
 
 </main>
