@@ -1,49 +1,48 @@
 class Admin::OrdersController < ApplicationController
-  before_action :order_search
-  before_action :authenticate_admin!
-  
-  def top
-    range = Date.today.begining_of_day..Date.today.end_of_day
-    @orders = Order.where(created_at: range)
-  end
-  
-  def index
-    @orders = Order.all
-    @orders = @orders.page(params[:page]).reverse_order
-  end
-  
-  def customer_index
-    @orders = Order.where(customer_id: params[:customer_id])
-    @orders = orders.page(params[page]).reverse_order
-    render 'index'
-  end
-  
-  def today_index
-    range = Date.today.begining_of_day..Date.today.end_of_day
-    @orders = Order.where(created_at: range)
-  end
-  
+ before_action :authenticate_admin!
   def show
     @order = Order.find(params[:id])
+    @order_items = @order.order_items
+    @subtotal = 0
+    @total_price = 0
+    @postage = 800
   end
-  
-  def update 
+
+  def status_update
     @order = Order.find(params[:id])
-    if @order.update(order_params)
-      flash[notice] = "注文ステータスが更新されました。"
-      if @order.order_status == "入金確認"
-        @order.order_items.update(making_status: "制作待ち")
-        flash[:success] = "制作ステータスが更新されました"
-      end
-      
+    @order.update(order_params)
+    if params[:order][:status] == "paid_up"
+      @order.order_items.update_all(making_status: 1)
+      # update_allにすることで注文商品の製作ステータスが更新される
     end
     redirect_to admin_order_path(@order)
   end
-  
+
+  def making_status_update
+    @order_item = OrderItem.find(params[:id])
+    @order = @order_item.order
+    @one_order = @order.order_item
+
+    if @order_item.update(order_item_params)
+      if params[:order_item][:making_status] == "production"
+        @order_item.order.update(status: 2)
+      end
+
+      if @one_order.count == @one_order.where(making_status: "complete").count
+        # １件に紐づいたorderのorder_detailsの数 == 左辺のorder_detailsのmaking_statusがcompleteになっている数
+        @order_item.order.update(status: 3)
+      end
+      redirect_to admin_order_path(@order_item.order_id)
+    end
+  end
+
   private
-  def order_params 
-  params.require(:order).permit(:order_status)
-  
+  def order_params
+    params.require(:order).permit(:status)
+  end
+
+  def order_item_params
+    params.require(:order_item).permit(:making_status)
   end
     
   

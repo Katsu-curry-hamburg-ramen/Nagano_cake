@@ -44,17 +44,21 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  
+
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
 
 
   namespace :admin do
     resources :orders, only: [:show, :update]
+    patch "/orders/:id/status" => "orders#status_update", as: "status"
+    patch "/orders/:id/making_status" => "orders#making_status_update", as: "making_status"
   end
 
 
   namespace :public do
-    resources :orders, only: [:new, :index, :show, :create]
+  resources :orders, only: [:new, :index, :show, :create]
+  post "/orders/confirm"=>"orders#confirm", as: 'confirm'
+  get "/orders/thankyou"=>"orders#thankyou", as: 'thankyou'
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

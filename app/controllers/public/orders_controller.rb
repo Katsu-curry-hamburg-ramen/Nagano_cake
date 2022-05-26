@@ -1,57 +1,45 @@
 class Public::OrdersController < ApplicationController
   def new
       @order = Order.new
-      @address = Address.new
   end
 
-  def comfirm
-     @order = current_customer.orders.new
-     @order.payment_method =params[:payment_method]
-     @order.postage = 800 #送料
-
-     @total_price = 0 #商品合計金額
-     current_customer.cart_items.each do |cart|
-       subtotal_price = cart_item.item.price * cart_item.quantity * 110/100
-       @total_price += subtotal_price
-     end
-     @order.total_payment = @totaal_price + @order.postage #請求金額＝商品合計金額＋送料
-
-     if params[:address_id] == "0"
-       @order.postcode = current_customer.postcode
-       @order.address = current_customer.address
-       @order.name = "#{current_customer.last_name}#{current_customer.first_name}"
-     elsif params[:address_id] == "1"
-       @address = Address.find(params[:address_select])
-       @order.postcode = @address.postcode
-       @order.address = @address.address
-       @order.name = @address.name
-     elsif params[:address_id] == "2"
-       @address =current_customer.addresses.new(address_params)
-        if @address.valid?
-         @order.postcode = @address.postcode
-         @order.address = @address.address
-         @order.name =@address.name
-        else
-         render 'new'
-        end
-     end
+ def confirm
+    @cart_items = current_customer.cart_items
+    @order = Order.new(order_params)
+    @total_price = 0
+    @order.postage = 800
+    if params[:order][:my_address] == "0"
+      @order.postcode = current_customer.postcode
+      @order.name = current_customer.last_name + current_customer.first_name
+      @order.address = current_customer.address
+    elsif params[:order][:my_address] == "1"
+      @address = Address.find(params[:order][:address_id])
+      @order.postcode = @address.postcode
+      @order.name = @address.name
+      @order.address = @address.address
+    end
   end
 
   def create
-     @order = Order.new(order_params)
-     @order.save
-     current_customer.cart_items.each do |cart_item|
-       order_item = OrderItem.new
-       order_item.item_id = cart_item.item_id
-       order_item.order_id = @order.id
-       order_item.quantity = cart_item.quantity
-       order_item.total_payment = cart_item.item.price * 110/100.0
-       order_item.save
+    @order = Order.new(order_params)
+    @order.customer_id = current_customer.id
+    @order.status = 0
+    if @order.save
+        @cart_items = current_customer.cart_items
+        @cart_items.each do |cart_item|
+        @order_items = OrderItems.new
+        @order_items.order_id = @order.id
+        @order_items.item_id = cart_item.item.id
+        @order_items. total_payment = cart_item.item.with_tax_price
+        @order_items. quantity = cart_item.quantity
+        @order_items.status = 0
+        @order_items.save
+      end
+      current_customer.cart_items.destroy_all
+      redirect_to thankyou_path
     end
-
-       current_customer.cart_items.destroy_all
-       redirect_to orders_thankyou_path
   end
+
 
  def thankyou
  end
@@ -71,13 +59,13 @@ class Public::OrdersController < ApplicationController
     @order.postage = 800
     @total_price = 0
     @subtotal = 0
-    @order_items = @order.order_
+    @order_items = @order.order_items
    end
-end
 
-  private
-  def address_params
-    params.require(:order).permit(:user_id,:payment_method,:total_payment,:postcode,:address,:name)
+
+   private
+  def order_params
+    params.require(:order).permit(:payment_method, :postcode, :address, :name, :postage, :total_payment, :payment_method)
   end
-
+end
 
