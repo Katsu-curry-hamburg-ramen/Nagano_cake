@@ -1,29 +1,25 @@
-<main>
-    
-    <body>
-        
-        <table>
-            <tbody>
+<div class="container">
+    <div class="row">
+        <div clas="col-12">
+            <h2 class="my-4">ジャンル一覧・追加</h2>
+            <%= form_with url: admin_genres_path(@genre), model: @genre do |f| %>
+                <table class="table table-borderless">
+                    <tr>
+                        <th><%= f.text_field :genrename, class:"form-control", placeholder:"ジャンル名" %></th>
+                        <td><%= f.submit "新規登録", class:"btn btn-danger" %></td>
+                    </tr>
+                </table>
+            <% end %>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table">
+            <% @genres.each do |genre| %>
                 <tr>
-                    <% @genres.each do |genre| %>
-                    <th><h2><%= genre.genrename %></h2></th>
-                    <th><h2><%= link_to "編集", edit_admin_genre_path(genre) %></h2></th>
-                    <% end %>
+                    <th><%= genre.genrename %></th>
+                    <td><%= link_to "編集", edit_admin_genre_path(genre), class:"btn btn-danger py-1" %></td>
                 </tr>
-            </tbody>
+            <% end %>
         </table>
-        
-        <h2>New Genres</h2>
-        <%= form_with url: admin_genres_path(@genre.id), model: @genre do |f| %>
-        <div class="form-group">
-            <%= f.text_field :genrename %>
-        </div>
-        
-        <div class="form-group">
-            <%= f.submit "Create Genres" %>
-        </div>
-        
-        <% end %>
-    </body>
-
-</main>
+    </div>
+</div>
