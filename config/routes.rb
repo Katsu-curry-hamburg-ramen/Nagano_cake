@@ -8,13 +8,21 @@ Rails.application.routes.draw do
     resources :genres, only: [:new, :index, :edit, :create, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
+  namespace :admin do
+    resources :order_items
+
+  end
+
+
   namespace :admin do
     resources :items, only: [:new,:index,:show,:edit,:create,:update]
   end
   namespace :public do
     resources :items, only: [:index,:show] do
   collection do
-        post 'search'
+        get 'search'
        end
     end
   end
@@ -37,15 +45,16 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-  
-  get 'addresses/index'
-  get 'addresses/edit'
-  
+  resources :addresses, only: [:index, :edit, :create, :update, :destroy]
+
+
+
+
   namespace :public do
     get 'orders/new'
     get 'orders/edit'
   end
- address
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   namespace :public do
@@ -60,6 +69,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :customers
   end
+
 
 
 end
