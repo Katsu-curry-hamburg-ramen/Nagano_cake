@@ -2,7 +2,7 @@
   <div class="col-3"></div>
     <div class="col-5">
     <h2 class="my-4">マイページ</h2>
-      <%= link_to "編集する", edit_public_customer_path, class:"btn btn-success my-3 ml-4" %>
+      <%= link_to "編集する", edit_public_customer_path, class:"btn btn-danger my-3 ml-4" %>
         <table class="table my-3">
           <tr>
             <th>氏名</th>
@@ -29,8 +29,10 @@
             <td><%= @customer.email %></td>
           </tr>
         </table>
-        <div class="btn btn-primary my-3 ml-4 col-2">配送先一覧</div>
-        <div class="btn btn-primary my-3 ml-5 col-2">注文履歴一覧</div>
+        <%= link_to addresses_path, class:"btn btn-outline-danger my-3 ml-4 col-2" do %>
+          <span><i class="fas fa-address-book"></i> 配送先一覧 </span>
+        <% end %>
+        <div class="btn btn-outline-danger my-3 ml-5 col-2">注文履歴一覧</div>
   </div>
 
 
