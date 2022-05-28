@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :public do
     resources :cart_items, only: [:index, :create, :update, :destroy, :destroy_all]
   end
-  delete :cart_images, to: 'public/cart_items#destroy_all', as: 'cart_items'
+  delete :cart_items, to: 'public/cart_items#destroy_all', as: 'cart_items'
   namespace :admin do
     resources :genres, only: [:new, :index, :edit, :create, :update, :destroy]
   end
@@ -11,7 +11,8 @@ Rails.application.routes.draw do
 
 
   namespace :admin do
-    resources :order_items
+    resources :order_items, only: [:update]
+
   end
 
 
@@ -45,20 +46,21 @@ Rails.application.routes.draw do
   }
 
 
+
   resources :addresses, only: [:index, :edit, :create, :update, :destroy]
 
 
   namespace :admin do
-    resources :orders, only: [:show, :update]
+    resources :orders, only: [:index, :show, :update]
     patch "/orders/:id/status" => "orders#status_update", as: "status"
     patch "/orders/:id/making_status" => "orders#making_status_update", as: "making_status"
   end
 
 
   namespace :public do
-  resources :orders, only: [:new, :index, :show, :create]
-  post "/orders/confirm"=>"orders#confirm", as: 'confirm'
-  get "/orders/thankyou"=>"orders#thankyou", as: 'thankyou'
+    post "/orders/confirm"=>"orders#confirm", as: 'confirm'
+    get "/orders/thankyou"=>"orders#thankyou", as: 'thankyou'
+    resources :orders, only: [:new, :index, :show, :create]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

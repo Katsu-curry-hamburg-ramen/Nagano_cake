@@ -1,49 +1,50 @@
 <div class="container">
   <div class="row">
-    <h2>商品詳細</h2>
-    <%= flash[:notice] %>
+    <div class="col-12">
+      <h2 class="my-4">商品詳細</h2>
+      <%= render 'layouts/errors', abj: @item %>
+    </div>
+  </div>
     <div class="row">
-		  <div class="col-xs-4">
-			<%= image_tag @item.get_product_image(200,200) %>
-		  </div>
-		    <div class="col-xs-8">
-			  <div class="table-responsive">
-				<table class="table text-nowrap">
-        <tbody>
+      <div class="col-4 d-flex align-items-center justify-content-center">
+			  <%= image_tag @item.get_product_image(200,200) %>
+      </div>
+      <div class="col-8">
+				<table class="table">
           <tr>
-            <td>商品名</td>
+            <th>商品名</th>
             <td><%= @item.name %></td>
           </tr>
           <tr>
-            <td>商品説明</td>
+            <th>商品説明</th>
             <td><%= @item.body %></td>
           </tr>
           <tr>
-            <td>ジャンル</td>
+            <th>ジャンル</th>
             <td><%= @item.genre.genrename %></td>
           </tr>
           <tr>
-            <td>税込価格</td><br><td>(税抜価格)</td>
-            <td><%= @item.add_tax_price.to_s(:delimited) %>(<%= @item.price %>)円</td>
+            <th>税込価格（税抜価格）</th>
+            <td><%= @item.add_tax_price.to_s(:delimited) %>（<%= @item.price %>）円</td>
           </tr>
           <tr>
-            <td>販売ステータス</td>
-            <td><% if @item.is_active == true %>
-    						<%= "販売中" %>
-    						<% else %>
-    						<%= "販売停止中" %>
-    						<% end %>
-    				</td>
+            <th>販売ステータス</th>
+            <td>
+              <% if @item.is_active == true %>
+                <a class="text-success font-weight-bold">販売中</a>
+              <% else %>
+                <a class="text-secondary">販売停止中</a>
+              <% end %>
+            </td>
           </tr>
-        </tbody>
-        </table>
+          </table>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
         </div>
-    </div>
+          <%= link_to "編集", edit_admin_item_path(@item.id), class: "btn btn-success col-2" %>
+        <div class="col-5">
+        </div>
+      </div>
   </div>
-  <div class="row">
-		<div class="text-right">
-			<%= link_to "編集", edit_admin_item_path(@item.id), class: "btn btn-primary" %>
-		</div>
-	</div>
-</div>

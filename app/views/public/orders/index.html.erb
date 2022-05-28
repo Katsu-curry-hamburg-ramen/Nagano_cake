@@ -18,22 +18,24 @@
       </tr>
     </thead>
     <tbody>
-      <% @orders.each do |order| %>
+      <% @orders.each do |order|%>
         <tr>
-          <td><%= order.created_at.strftime("%Y/ %m/ %d") %></td>
-          <td>
-            <%= order.postcode %></br>
-            <%= order.address %></br>
-            <%= order.name %></br>
-          </td>
-          <td>
-            <% order.order_items.each do |order_items| %>
-              <%= order_item.name %>
+          <td class="px-3"><p><%= order.created_at.strftime('%Y/%m/%d') %></p></td>
+          <td class="px-3"><p><%= order.postcode %> <%= order.address%><%= order.name %></p></td>
+          <td class="px-3">
+
+            <% order.order_items.each do |order_item| %>
+              <p><%= order_item.item.name %></p>
             <% end %>
           </td>
-          <td><%= order.total_payment %>円</td>
-          <td><%= order.status_i18n %></td>
-          <td><%= link_to "表示する", order_path(order.id), class:"btn btn-primary" %></td>
+          <td class="px-3"><p><% @total = 0 %>
+                              <% order.order_items.each do |order_item|%>
+                              <% @total += order_item.quantity * order_item.total_payment %>
+                              <% end %>
+                              <%= @total %>
+                              </p></td>
+          <td class="px-3"><p><%= order.status %></p></td>
+          <td class="px-3"><p><%= link_to "表示する",  public_order_path(order.id), class:'btn btn-primary text-nowrap' %></p></td>
         </tr>
       <% end %>
     </tbody>
