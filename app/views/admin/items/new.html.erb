@@ -6,7 +6,7 @@
                 <h2>商品新規登録</h2>
             </div>
         </div>
-            <%= flash.now[:alert] %>
+            <%= render 'layouts/errors', abj: @item %>
             <%= form_with model: @item, url:admin_items_path do |f| %>
             <!--</%= render 'layouts/error_messages', model: f.object %>-->
                 <div class="row">

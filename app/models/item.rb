@@ -4,10 +4,10 @@ class Item < ApplicationRecord
     belongs_to :genre
     has_many :cart_items, dependent: :destroy
     with_options presence: true do
-    validates :name, uniqueness: true
-    validates :body
-    validates :genre_id
-    validates :price
+      validates :name, uniqueness: true
+      validates :body
+      validates :genre_id
+      validates :price
     end
     validates :is_active, inclusion:{in: [true, false]}
     has_one_attached :product_image
