@@ -1,19 +1,9 @@
 ja:
   enums:
-
-    order_item:
-      status:
-        impossible: "着手不可"
-        wait: "製作待ち"
-        midst: "製作中"
-        completion: "製作完了"
-
-    orders_item:
-      status:
-        cannot_be_started: "着手不可"
-        waiting_for_production: "制作待ち"
-        in_production: "制作中"
-        production_completed: "制作完了"
+    item:
+      is_active:
+        available: "販売中"
+        unavailable: "販売停止中"
     order:
       payment_method:
         credit_card: "クレジットカード"
@@ -24,5 +14,9 @@ ja:
         product: "製作中"
         ready: "発送準備中"
         sent: "発送済み"
-
-
+    order_item:
+      status:
+        impossible: "製作不可"
+        wait: "製作待ち"
+        midst: "製作中"
+        completion: "製作完了"

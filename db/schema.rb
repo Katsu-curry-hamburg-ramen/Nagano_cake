@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2022_05_22_045118) do
-
-ActiveRecord::Schema.define(version: 2022_05_22_055330) do
+ActiveRecord::Schema.define(version: 2022_05_26_210639) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -46,12 +43,11 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
   create_table "addresses", force: :cascade do |t|
     t.string "customer_id", null: false
     t.string "name", null: false
-    t.integer "postcode", null: false
+    t.string "postcode", null: false
     t.text "address", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
-
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -78,7 +74,6 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -99,18 +94,6 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
-
-  create_table "order_items", force: :cascade do |t|
-    t.integer "item_id"
-    t.integer "quantity"
-    t.integer "status", default: 0
-    t.integer "total_payment"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "order_id"
-  end
-
-
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -125,6 +108,16 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
     t.boolean "is_active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "quantity"
+    t.integer "status", default: 0
+    t.integer "total_payment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "order_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -142,5 +135,4 @@ ActiveRecord::Schema.define(version: 2022_05_22_055330) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-
 end
