@@ -30,7 +30,7 @@
           </td>
           <td class="px-3"><p><% @total = 0 %>
                               <% order.order_items.each do |order_item|%>
-                              <% @total += order_item.quantity * order_item.total_payment %>
+                              <% @total += order_item.quantity * order_item.total_payment %>円
                               <% end %>
                               <%= @total %>
                               </p></td>

@@ -34,9 +34,9 @@
           <% @order_items.each do |order_item| %>
               <tr>
                 <td><%= order_item.item.name %></td>
-                <td><%= order_item.item.add_tax_price %></td>
-                <td><%= order_item.quantity %></td>
-                <td><%= order_item.item.add_tax_price * order_item.quantity %></td>
+                <td><%= order_item.item.add_tax_price %>円</td>
+                <td><%= order_item.quantity %>個</td>
+                <td><%= order_item.item.add_tax_price * order_item.quantity %>円</td>
                 <td>
                   <%= form_with model: order_item, url: admin_order_item_path(order_item.id) do |f| %>
                     <%= f.select :status, OrderItem.statuses.keys.map {|k| [I18n.t("enums.order_item.status.#{k}"), k]} %>
@@ -51,11 +51,11 @@
       <span><% @order.order_items.each do |order_item|%>
             <% @total += order_item.total_payment %>
              <% end %>
-             <%= @total %></span><br>
+             <%= @total %>円</span><br>
       <label>送料</label>
-      <span><%= @order.postage %></span><br>
+      <span><%= @order.postage %>円</span><br>
       <label>請求額合計</label>
-      <span><%= @total += @order.postage %></span>
+      <span><%= @total += @order.postage %>円</span>
     </div>
   </div>
 </div>
