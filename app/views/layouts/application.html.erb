@@ -5,58 +5,101 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <header>
-      <% if customer_signed_in? %>
-        <li>
-          <%= link_to "マイページ", public_customer_path(current_customer) %>
-        </li>
-        <li>
-          商品一覧
-        </li>
-        <li>
-          カート
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-        </li>
-      <% elsif admin_signed_in? %>
-        <li>
-          商品一覧
-        </li>
-        <li>
-          <%= link_to "会員一覧", admin_customers_path %>
-        </li>
-        <li>
-          注文履歴一覧
-        </li>
-        <li>
-          ジャンル一覧
-        </li>
-        <li>
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "About", about_path %>
-        </li>
-        <li>
-          商品一覧
-        </li>
-        <li>
-          <%= link_to "新規登録", new_customer_registration_path %>
-        </li>
-        <li>
-          <%= link_to "ログイン", new_customer_session_path %>
-        </li>
-      <% end %>
+    <header class="shadow-lg bg-danger">
+      <nav class="navbar">
+      <div class="container">
+        <a href="/"><%= image_tag('logo_s.png') %></a>
+        <ul class="nav nav-tabs">
+          <% if customer_signed_in? %>
+            <li class="nav-item">
+              <%= link_to public_customer_path(current_customer), class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-user"></i> My page </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to public_items_path, class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-birthday-cake"></i> 商品一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to public_cart_items_path, class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-shopping-cart"></i> カート </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to destroy_customer_session_path, method: :delete, class:"nav-link text-white" do %>
+                <span><i class="fas fa-sign-out-alt"></i> ログアウト </span>
+              <% end %>
+            </li>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+              <button class="btn btn-light" type="submit">Search</button>
+            </form>
+          <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to admin_items_path, class:"nav-link text-white" do %>
+                <span><i class="fas fa-birthday-cake"></i> 商品一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_customers_path, class:"nav-link text-white" do %>
+                <span><i class="fas fa-users"></i> 会員一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_orders_path, class:"nav-link text-white" do %>
+                 <span><i class="fas fa-users"></i> 注文履歴一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to admin_genres_path, class:"nav-link text-white" do %>
+                <span><i class="fas fa-tablet-alt"></i> ジャンル一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link text-white" %>
+            </li>
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+              <button class="btn btn-light" type="submit">Search</button>
+            </form>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to about_path, class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-address-card"></i> About </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to public_items_path, class:"nav-link text-white" do %>
+                <span><i class="fas fa-birthday-cake"></i> 商品一覧 </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_registration_path, class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-user-plus"></i> Sign Up </span>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to new_customer_session_path, class:"nav-link mx-2 text-white" do %>
+                <span><i class="fas fa-sign-in-alt"></i> Log in </span>
+              <% end %>
+            </li>
+           <form class="form-inline">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search">
+              <button class="btn btn-light" type="submit">Search</button>
+            </form>
+          <% end %>
+        </ul>
+        </nav>
     </header>
-    <div class="container">
-    <%= yield %>
-    </div>
+      <main class="xl-auto lg-auto md-auto">
+          <%= yield %>
+        </div>
+      </main>
   </body>
 </html>

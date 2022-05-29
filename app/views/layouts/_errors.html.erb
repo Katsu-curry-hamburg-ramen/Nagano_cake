@@ -1,0 +1,8 @@
+<% if abj.errors.any? %>
+  <%= abj.errors.count %>件のエラーが発生しました
+  <ul>
+  <% abj.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
