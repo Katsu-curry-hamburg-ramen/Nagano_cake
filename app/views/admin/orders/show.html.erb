@@ -16,7 +16,7 @@
 
       <label>注文ステータス</label>
       <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
-        <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.order_status.#{k}"), k]} %>
+        <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]} %>
         <%= f.submit '更新', class: 'btn btn-success' %>
       <% end %>
 
