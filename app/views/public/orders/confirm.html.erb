@@ -23,14 +23,14 @@
               <%= cart_item.item.name %>
             </td>
             <td>
-              <%= cart_item.item.add_tax_price %>
+              <%= cart_item.item.add_tax_price %>円
             </td>
             <td>
               <%= cart_item.quantity %>
             </td>
             <td>
               <%= cart_item.subtotal %>
-              <% @total += cart_item.subtotal %>
+              <% @total += cart_item.subtotal %>円
             </td>
           </tr>
           <% end %>
@@ -47,9 +47,9 @@
         </thead>
         <tbody>
           <tr>
-            <td><%= @order.postage %></td>
-            <td><%= @total %></td>
-            <td><%= @total += @order.postage %></td>
+            <td><%= @order.postage %>円</td>
+            <td><%= @total %>円</td>
+            <td><%= @total += @order.postage %>円</td>
           </tr>
         </tbody>
       </table>

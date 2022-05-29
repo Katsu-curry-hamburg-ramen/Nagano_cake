@@ -30,11 +30,11 @@
           </td>
           <td class="px-3"><p><% @total = 0 %>
                               <% order.order_items.each do |order_item|%>
-                              <% @total += order_item.quantity * order_item.total_payment %>
+                              <% @total += order_item.quantity * order_item.total_payment %>円
                               <% end %>
                               <%= @total %>
                               </p></td>
-          <td class="px-3"><p><%= order.status %></p></td>
+          <td class="px-3"><p><%= order.status_i18n %></p></td>
           <td class="px-3"><p><%= link_to "表示する",  public_order_path(order.id), class:'btn btn-primary text-nowrap' %></p></td>
         </tr>
       <% end %>
