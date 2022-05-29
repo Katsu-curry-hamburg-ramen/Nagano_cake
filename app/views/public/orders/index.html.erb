@@ -34,7 +34,7 @@
                               <% end %>
                               <%= @total %>
                               </p></td>
-          <td class="px-3"><p><%= order.status %></p></td>
+          <td class="px-3"><p><%= order.status_i18n %></p></td>
           <td class="px-3"><p><%= link_to "表示する",  public_order_path(order.id), class:'btn btn-primary text-nowrap' %></p></td>
         </tr>
       <% end %>
